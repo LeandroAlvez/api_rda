@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema RDA(Relatório Desccritivo Analítico)</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="static/script_rda.js"></script>
+    <link rel="stylesheet" href="static/style_rda.css">
+</head>
+<body>
+    <div class="overlay hidden" id="overlay"></div>
+    <div class="loader hidden" id="loader" title="4">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+        <rect x="0" y="0" width="4" height="10" fill="#333">
+            <animateTransform attributeType="xml"
+            attributeName="transform" type="translate"
+            values="0 0; 0 20; 0 0"
+            begin="0" dur="0.6s" repeatCount="indefinite" />
+        </rect>
+        <rect x="10" y="0" width="4" height="10" fill="#333">
+            <animateTransform attributeType="xml"
+            attributeName="transform" type="translate"
+            values="0 0; 0 20; 0 0"
+            begin="0.2s" dur="0.6s" repeatCount="indefinite" />
+        </rect>
+        <rect x="20" y="0" width="4" height="10" fill="#333">
+            <animateTransform attributeType="xml"
+            attributeName="transform" type="translate"
+            values="0 0; 0 20; 0 0"
+            begin="0.4s" dur="0.6s" repeatCount="indefinite" />
+        </rect>
+        </svg>
+    </div>
+        <div class="fx-top">
+            <div class="container faixa">
+            </div>
+        </div>
+        </div>
+        <div class="container page">
+            <img src="/static/img/Logo SAMU_pqn.svg" class="logo_samu" alt="logo do SAMU 192">
+            <h4>Sistema RDA (Relatório Descritivo Analítico)</h4>
+            <div class="container-off no-print">
+                <a class="icon_logout" href="/logout">
+                    <i class="fas fa-power-off fa-lg"></i>
+                </a>
+                <h6 class="frase_sair">Sair</h6>
+            </div>
+            <form action="/relatorio" method="POST" class="no-print">
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="data_inicio">Data Início:</label>
+                        <input type="date" class="form-control" id="data_inicio" name="data_inicio" required>
+                    </div>
+                    <div class="col-sm">
+                        <label for="data_fim">Data Fim:</label>
+                        <input type="date" class="form-control" id="data_fim" name="data_fim" required>
+                    </div>
+                    <div class="col-sm">
+                        <label for="tipo_veiculo">Tipo de Veículo:</label>
+                        <select id="tipo_veiculo" class="form-control" name="tipo_veiculo" required>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="veiculo">Veículo:</label>
+                        <select id="veiculo" class="form-control" value="Veículo" name="veiculo" required></select>
+                    </div>
+                </div>
+                <div class="col-sm text-right">
+                    <button id="btn-gerar-relatorio" type="submit" class="btn btn-primary">Gerar Relatório</button>
+                </div>
+            </form>
+            <div class="container hidden" id="relatorio-container">
+                <div>
+                    <h1>Relatório de produção</h1>
+                    <h3 class="h3_nome_veiculo" id="nome_veiculo_selecionado"></h3>
+                    <img src="/static/img/icon_pdf_azul.svg" alt="Download em PDF" class="icon_pdf no-print" onclick="gerarPDF()">
+                </div>
+                <div>
+                    <table class="table" id="dados_atendimento">
+                        <thead class="thead-dark">
+                            <tr></tr>
+                        </thead>
+                    </table>
+                </div>
+                <div></div>
+                <div>
+                    <table class="table" id="dados_atendimento_tipo_ocorrencia">
+                        <thead class="thead-dark">
+                            <tr></tr>
+                        </thead>
+                    </table>
+                </div>
+                <p><i>*O item "Outros" refere-se aos tipos de ocorrências: Transferências, Transferências CERINTER, Transferências inter-hospitalares e valores não preenchidos.</i></p>
+                <div></div>
+                <div>
+                    <table class="table" id="dados_atendimento_por_genero">
+                        <thead class="thead-dark">
+                            <tr></tr>
+                        </thead>
+                    </table>
+                </div>
+                <div></div>
+                <div>
+                    <table class="table" id="dados_atendimento_por_fxEtaria">
+                        <thead class="thead-dark">
+                            <tr></tr>
+                        </thead>
+                    </table>
+                </div>
+                <div></div>
+                <div>
+                    <table class="table" id="dados_atendimento_por_municipio">
+                        <thead class="thead-dark">
+                            <tr></tr>
+                        </thead>
+                    </table>
+                </div>
+                <div></div>
+                <div>
+                    <table class="table" id="dados_atendimento_por_unidade">
+                        <thead class="thead-dark">
+                            <tr></tr>
+                        </thead>
+                    </table>
+                </div>
+                <p><i>*O item "Outros" refere-se as ocorrências que não tiveram seu destino à uma unidade sáude.</i></p>
+            </div>
+        </div>
+    </div>
+    <footer class="footer-section no-print">
+        <div class="faixa_footer"></div>
+        <div class="copyright-area">
+            <div class="container">
+                <div class="row footer">
+                    <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                        <div class="copyright-text">
+                            <p>Copyright &copy; 2024, All Right Reserved <a href="blank">Leandro Alves</a></p>
+                        </div>
+                    </div>
+                    <div class="footer-social-icon">
+                        <a href="#"><i class="fa-brands fa-github"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fa-solid fa-globe"></i></a>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function gerarPDF() {
+            // Ocultar elementos que não serão impressos
+            const elementosParaOcultar = document.querySelectorAll('.no-print');
+            elementosParaOcultar.forEach(element => {
+                element.style.display = 'none';           
+            });
+            // Abrir uma nova janela de impressão
+            window.print();
+            // Aguardar um curto período para a janela de impressão abrir
+            setTimeout(() => {
+                elementosParaOcultar.forEach(element => {
+                    element.style.display = '';
+                });
+            }, 100);
+        };
+    </script>
+</body>
+</html>
