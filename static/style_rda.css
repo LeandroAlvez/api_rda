@@ -1,0 +1,257 @@
+
+
+html {
+    position: relative;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color:#F0F0F0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.hidden {
+    display: none;
+}
+.logo_samu {
+margin-bottom: 0.5rem;
+}
+
+h4 {
+    color:#303030;
+    font-family: Helvetica;
+    margin-bottom: 1rem;
+}
+h6.frase_sair {
+    font-size: 1rem;
+    margin-right: -0.2rem;
+    color: #052c55;
+}
+
+h6.frase_sair {
+    margin-right: -4px;
+}
+
+.h3_nome_veiculo{
+    font-size: 1.75rem;
+    margin-bottom: 3%;
+}
+
+.fx-top {
+background-color:#CC5521;
+        height: 2rem;
+        margin-bottom: 1rem;
+}
+
+div.faixa{
+    text-align: right;
+}
+
+.fa-lg {
+    font-size: 1.33333333em;
+    line-height: .75em;
+    vertical-align: -15%;
+    margin-top: 1rem;
+}
+
+.fa-lg:hover{
+    color: #ff5e14;
+    font-size: 1.33333333em;
+    line-height: .75em;
+    vertical-align: -15%;
+    margin-top: 1rem;
+}
+
+a.icon_logout {
+    color: #052c55;
+}
+
+.btn-primary {
+    border-color: #020030;
+    background-color: #041B33;
+    margin-top: 2rem ;
+}
+
+.btn-primary:hover {
+    border-color: #161616;
+    background-color: #052c55;
+    margin-top: 2rem ;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active{
+    color: #fff;
+    background-color: #020d1a;
+    border-color: #111111;
+}
+
+.btn-primary:focus {
+    color: #fff;
+    background-color: #020d1a;
+    border-color: #141414;
+    box-shadow: 0 0 0 .2rem rgb(200 211 223 / 50%);
+}
+
+.table .thead-dark th {
+    color: #fff;
+    background-color: #041b33;
+    border-color: #454d55;
+}
+
+.page {
+    flex: 1;
+    padding-bottom: 10%;
+}
+
+.container.page {
+    position: relative;
+    padding-bottom: 15%;
+}
+
+.footer-section {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-section .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-social-icon i {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 38px;
+    font-size: 25px;
+    color: #ffffff;
+}
+
+.footer-social-icon i:hover {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 38px;
+    font-size: 25px;
+    color: #ff5e14;
+}
+
+.footer-social-icon {
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    margin-top: 5%;
+    margin-bottom: -5%;
+}
+
+.copyright-area{
+background: #212529;
+padding: 25px 0;
+}
+.copyright-text p {
+margin: 0;
+font-size: 14px;
+color: #ffffff;
+}
+.copyright-text p a{
+color: #ff5e14;
+}
+.footer-menu li {
+display: inline-block;
+margin-left: 20px;
+}
+.footer-menu li:hover a{
+color: #ff5e14;
+}
+.footer-menu li a {
+font-size: 14px;
+color: #878787;
+}
+
+.text-lg-left {
+    margin-top: 3%;
+    max-width: 100%;
+}
+.faixa_footer {
+    height: 0.5vh;
+    background-color:#ff5e14;
+}
+.row.footer {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-off {
+    text-align: right;    
+}
+
+.loader{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+.overlay {
+position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Altere a opacidade conforme desejado */
+    z-index: 9999; /* Certifique-se de que o z-index do overlay seja menor que o do loader */
+}
+
+.loader svg {
+width: 50px;
+height: 50px;
+}
+
+svg path,
+svg rect{
+fill: #FF6700;
+}
+
+.icon_pdf {
+    margin-left: 96%;
+    width: 35px;
+    margin-top: -5%;
+    margin-bottom: 2%;
+    fill: #052C55;
+}
+
+.icon_pdf:active {
+    margin-left: 96%;
+    width: 30px;
+    margin-top: -5%;
+    margin-bottom: 1%;
+}
+
+@media print {
+    .no-print {
+        display: none;
+    }
+    @media print {
+        .no-print {
+            display: none;
+        }
+        .table .thead-dark th {
+        color: #000000;
+        border-color: #000000;
+        border: 0 10px 0 0
+    }
+    }
+}

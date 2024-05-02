@@ -1,0 +1,20 @@
+<html>
+  <body>
+    <form action="/relatorio" method="post">
+      <label>Data de Início:</label>
+      <input type="date" name="data_inicio" required>
+      <br>
+      <label>Data de Fim:</label>
+      <input type="date" name="data_fim" required>
+      <br>
+      <label>Veículo:</label>
+      <select name="veiculo" required>
+        {% for veiculo in veiculos %}
+        <option value="{{ veiculo }}">{{ veiculo }}</option>
+        {% endfor %}
+      </select>
+      <br>
+      <input type="submit" value="Gerar Relatório">
+    </form>
+  </body>
+</html>
