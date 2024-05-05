@@ -1,9 +1,7 @@
 from flask import Flask, request, render_template, make_response, jsonify, redirect, url_for, session, request
 from flask_login import login_required, LoginManager, UserMixin, login_user
-# import pdfkit
 import calendar
 from datetime import datetime, timedelta
-# from weasyprint import HTML
 import jaydebeapi
 
 
@@ -147,7 +145,6 @@ def filtro_veiculos():
             public.dim_tipo_veiculo.nm_tipo_veiculo = ?
             AND public.dim_veiculo2.sk_veiculo not in (36, 78, 105, 120, 173, 247)
             AND public.dim_veiculo2.flg_ativo = '1'
-            --AND public.dim_veiculo.cd_cnes is not null
         GROUP BY 
             public.dim_tipo_veiculo.nm_tipo_veiculo,
 	        public.dim_veiculo2.ds_equipe
@@ -164,7 +161,6 @@ def dados_atendimentos():
     veiculo = request.form.get('veiculo')
     cursor = conn.cursor()
     data_fim_ajustada = datetime.strptime(data_fim, '%Y-%m-%d') + timedelta(days=1)
-    # print(data_inicio)
     cursor.execute('''
         SELECT
             EXTRACT(YEAR from fo.data_abertura_ocorrencia) as ano,       
@@ -180,7 +176,6 @@ def dados_atendimentos():
              fo.data_abertura_ocorrencia >= TO_TIMESTAMP(?, 'YYYY-MM-DD HH24:MI:SS')
             AND fo.data_abertura_ocorrencia < TO_TIMESTAMP(?, 'YYYY-MM-DD HH24:MI:SS')
             AND dv.ds_equipe = ?
-            --AND fo.sk_tipo_ocorrencia in (22, 42, 65, 88, 113, 136, 160, 184)
             AND fv.sk_tipo_motivo_cancelamento = 0
             AND fv.data_hora_chegada_local IS NOT NULL
             AND fo.data_encerramento_ocorrencia IS NOT NULL

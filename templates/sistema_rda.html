@@ -156,15 +156,11 @@
     </footer>
     <script>
         function gerarPDF() {
-        // Ocultar elementos que não serão impressos
         const elementosParaOcultar = document.querySelectorAll('.no-print');
         elementosParaOcultar.forEach(element => {
             element.style.display = 'none';           
         });
-        // const nomeVeiculo = document.getElementById('nome_veiculo_selecionado').textContent.trim();
-        // const nomeArquivo = nomeVeiculo + '.pdf';
         window.open();
-        // Aguardar um curto período para a janela de impressão abrir
         setTimeout(() => {
             elementosParaOcultar.forEach(element => {
                 element.style.display = '';
