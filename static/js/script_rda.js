@@ -285,7 +285,7 @@ $(document).ready(function() {
                 data.forEach(function(item) {
                     if (!groupedData[item.sexo_vitima]) {
                         groupedData[item.sexo_vitima] = {};
-                        groupedData[item.sexo_vitima]['Total'] = 0;
+                        groupedData[item.sexo_vitima]['Total'] = 0; // Adiciona uma propriedade para armazenar o total
                     }
                     if (!groupedData[item.sexo_vitima][item.mes]) {
                         groupedData[item.sexo_vitima][item.mes] = item.total_atendimentos;
