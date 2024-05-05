@@ -1,10 +1,11 @@
-from flask import Flask, request, render_template, make_response, jsonify, redirect, url_for, session
+from flask import Flask, request, render_template, make_response, jsonify, redirect, url_for, session, request
 from flask_login import login_required, LoginManager, UserMixin, login_user
+# import pdfkit
 import calendar
 from datetime import datetime, timedelta
-import json
+# from weasyprint import HTML
 import jaydebeapi
-from collections import defaultdict
+
 
 # Configurar os detalhes da conexão
 driver = 'org.postgresql.Driver'
@@ -70,6 +71,25 @@ def obter_id_do_usuario(nome_usuario):
 @app.route('/')
 def page_login():
     return render_template('login.html')
+
+# @app.route('/pdf_gerado', methods=['GET', 'POST'])
+# def gerar_pdf():
+#     titulo = request.args.get('titulo')
+#     renderizado = render_template('testepdf.html', titulo=titulo)
+#     config = pdfkit.configuration(wkhtmltopdf='static/wkhtmltopdf/bin/wkhtmltopdf.exe')
+#     pdf= pdfkit.from_string(renderizado, False, configuration=config)
+#     # pdf = HTML(string=renderizado).write_pdf()
+    
+#     response = make_response(pdf)
+#     response.headers['Content-Type'] = 'application/pdf'
+#     nome_arquivo = f'{titulo}.pdf' if titulo else 'relatório_vazio.pdf'
+#     response.headers['Content-Disposition'] = f'inline; filename={nome_arquivo}'
+#     response.headers['nome_arquivo'] = nome_arquivo
+#     return response
+
+# @app.route('/testepdf', methods=['GET'])
+# def pdf_pass():
+#     return render_template('testepdf.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -172,7 +192,11 @@ def dados_atendimentos():
             EXTRACT(MONTH from fo.data_abertura_ocorrencia)
        ''', (data_inicio, data_fim_ajustada.strftime('%Y-%m-%d %H:%M:%S'), veiculo))
     rows = cursor.fetchall()
-    result = [{'mes': traduzir_mes(calendar.month_name[row[1]]), 'total_atendimentos': row[2], 'tempo_medio_resposta_saida_base': row[3], 'tempo_medio_resposta_total': row[4]} for row in rows]
+    result = [{'mes': traduzir_mes(calendar.month_name[row[1]]), 
+               'total_atendimentos': row[2], 
+               'tempo_medio_resposta_saida_base': row[3], 
+               'tempo_medio_resposta_total': row[4]} for row in rows
+            ]
     return jsonify(result)
 
 @app.route('/dados_atendimento_tipo_ocorrencia', methods=['POST'])

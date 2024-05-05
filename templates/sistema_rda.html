@@ -9,8 +9,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="static/script_rda.js"></script>
-    <link rel="stylesheet" href="static/style_rda.css">
+    <script src="static/js/script_rda.js"></script>
+    <link rel="stylesheet" href="static/css/style_rda.css">
 </head>
 <body>
     <div class="overlay hidden" id="overlay"></div>
@@ -43,23 +43,23 @@
         </div>
         </div>
         <div class="container page">
-            <img src="/static/img/Logo SAMU_pqn.svg" class="logo_samu" alt="logo do SAMU 192">
-            <h4>Sistema RDA (Relatório Descritivo Analítico)</h4>
             <div class="container-off no-print">
                 <a class="icon_logout" href="/logout">
                     <i class="fas fa-power-off fa-lg"></i>
                 </a>
                 <h6 class="frase_sair">Sair</h6>
             </div>
+            <img src="/static/img/Logo SAMU_pqn.svg" class="logo_samu" alt="logo do SAMU 192">
+            <h4>Sistema RDA (Relatório Descritivo Analítico)</h4>
             <form action="/relatorio" method="POST" class="no-print">
                 <div class="row">
                     <div class="col-sm">
                         <label for="data_inicio">Data Início:</label>
-                        <input type="date" class="form-control" id="data_inicio" name="data_inicio" required>
+                        <input type="date" class="form-control" id="data_inicio" name="data_inicio" min="2012-01-01" max="2024-03-31" required>
                     </div>
                     <div class="col-sm">
                         <label for="data_fim">Data Fim:</label>
-                        <input type="date" class="form-control" id="data_fim" name="data_fim" required>
+                        <input type="date" class="form-control" id="data_fim" name="data_fim" min="2012-01-01" max="2024-03-31" required>
                     </div>
                     <div class="col-sm">
                         <label for="tipo_veiculo">Tipo de Veículo:</label>
@@ -156,20 +156,21 @@
     </footer>
     <script>
         function gerarPDF() {
-            // Ocultar elementos que não serão impressos
-            const elementosParaOcultar = document.querySelectorAll('.no-print');
+        // Ocultar elementos que não serão impressos
+        const elementosParaOcultar = document.querySelectorAll('.no-print');
+        elementosParaOcultar.forEach(element => {
+            element.style.display = 'none';           
+        });
+        // const nomeVeiculo = document.getElementById('nome_veiculo_selecionado').textContent.trim();
+        // const nomeArquivo = nomeVeiculo + '.pdf';
+        window.open();
+        // Aguardar um curto período para a janela de impressão abrir
+        setTimeout(() => {
             elementosParaOcultar.forEach(element => {
-                element.style.display = 'none';           
+                element.style.display = '';
             });
-            // Abrir uma nova janela de impressão
-            window.print();
-            // Aguardar um curto período para a janela de impressão abrir
-            setTimeout(() => {
-                elementosParaOcultar.forEach(element => {
-                    element.style.display = '';
-                });
-            }, 100);
-        };
+        }, 100);
+    };
     </script>
 </body>
 </html>

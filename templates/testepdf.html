@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/static/script_rda.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">C:\api_samu\static\script_rda.js
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1 id="titulo"> Fazendo teste de impressão. </h1>
+    </div>
+    <div>
+        <div class="col-sm text-right">
+            <!-- <img onclick="gerarPDF()" src="/static/img/UserAvatar.png" alt="Download em PDF" class="icon_pdf no-print"> -->
+            <button id="btn-gerar-relatorio" type="submit" class="btn btn-primary" onclick="gerarPDF()">Gerar Relatório</i></button>
+            <!-- <i class="fa-regular fa-file-pdf icon_pdf" onclick="gerarPDF()"></i> -->
+        </div>
+    </div>
+    <script>
+        function gerarPDF() {
+            console.log('A função foi acionada')
+        // Ocultar elementos que não serão impressos
+        const elementosParaOcultar = document.querySelectorAll('.no-print');
+        elementosParaOcultar.forEach(element => {
+            element.style.display = 'none';           
+        });
+        var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/pdf_gerado", true);
+            xhr.responseType = "blob";
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var blob = new Blob([xhr.response], { type: 'application/pdf' });
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    const nome_arquivo = xhr.getResponseHeader('nome_arquivo');
+                    link.download = nome_arquivo;
+                    link.click();
+                }
+            };
+            console.log(xhr)
+            xhr.send();
+            
+        // Aguardar um curto período para a janela de impressão abrir id="nome_veiculo_selecionado"
+        setTimeout(() => {
+            elementosParaOcultar.forEach(element => {
+                element.style.display = '';
+            });
+        }, 1000);
+    };
+    </script>
+</body>
+</html>
